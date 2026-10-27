@@ -50,11 +50,11 @@ local Main = Instance.new("Frame", Gui)
 Main.Name = "MainFrame"
 Main.Size = UDim2.new(0, 0, 0, 0)
 Main.Position = UDim2.new(0.5, 0, 0.35, 0)
-Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main.BackgroundColor3 = Color3.fromRGB(12, 16, 28)
 Main.ClipsDescendants = true
 Main.Visible = false
 Main.Active = true
-Main.BackgroundTransparency = 1
+Main.BackgroundTransparency = 0
 
 local BgImage = Instance.new("ImageLabel", Main)
 BgImage.Size = UDim2.new(1, 0, 1, 0)
@@ -65,7 +65,7 @@ BgImage.ScaleType = Enum.ScaleType.Crop
 local Overlay = Instance.new("Frame", Main)
 Overlay.Size = UDim2.new(1, 0, 1, 0)
 Overlay.BackgroundColor3 = Color3.fromRGB(8, 11, 20)
-Overlay.BackgroundTransparency = 0.35
+Overlay.BackgroundTransparency = 0.25
 Instance.new("UICorner", Overlay).CornerRadius = UDim.new(0, 16)
 
 Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 16)
@@ -75,8 +75,8 @@ MainStroke.Thickness = 1.5
 
 local Header = Instance.new("Frame", Main)
 Header.Size = UDim2.new(1, 0, 0, 52)
-Header.BackgroundColor3 = Color3.fromRGB(13, 17, 30)
-Header.BackgroundTransparency = 0.3
+Header.BackgroundColor3 = Color3.fromRGB(18, 24, 42)
+Header.BackgroundTransparency = 0.2
 Header.BorderSizePixel = 0
 Instance.new("UICorner", Header).CornerRadius = UDim.new(0, 16)
 
@@ -93,7 +93,7 @@ local MinimizeBtn = Instance.new("TextButton", Header)
 MinimizeBtn.Text = "─"
 MinimizeBtn.Size = UDim2.new(0, 26, 0, 26)
 MinimizeBtn.Position = UDim2.new(1, -32, 0, 6)
-MinimizeBtn.BackgroundColor3 = Color3.fromRGB(20, 26, 45)
+MinimizeBtn.BackgroundColor3 = Color3.fromRGB(25, 34, 58)
 MinimizeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 MinimizeBtn.Font = Enum.Font.GothamBold
 MinimizeBtn.TextSize = 13
@@ -113,7 +113,7 @@ local function createTab(name, index)
     btn.Text = name
     btn.Size = UDim2.new(0.24, -3, 1, 0)
     btn.Position = UDim2.new((index-1)*0.25, 0, 0, 0)
-    btn.BackgroundColor3 = index == 1 and Color3.fromRGB(0, 162, 255) or Color3.fromRGB(20, 26, 45)
+    btn.BackgroundColor3 = index == 1 and Color3.fromRGB(0, 162, 255) or Color3.fromRGB(25, 34, 58)
     btn.TextColor3 = index == 1 and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(180, 180, 180)
     btn.Font = Enum.Font.GothamBold
     btn.TextSize = 10
@@ -132,7 +132,7 @@ local function createTab(name, index)
     btn.MouseButton1Click:Connect(function()
         for _, c in pairs(tabContents) do c.Visible = false end
         for _, b in pairs(tabButtons) do
-            TweenService:Create(b, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(20, 26, 45), TextColor3 = Color3.fromRGB(180, 180, 180)}):Play()
+            TweenService:Create(b, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(25, 34, 58), TextColor3 = Color3.fromRGB(180, 180, 180)}):Play()
         end
         content.Visible = true
         TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(0, 162, 255), TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
@@ -145,8 +145,8 @@ local BoosterTab = tabContents["Booster"]
 local StatsCard = Instance.new("Frame", BoosterTab)
 StatsCard.Size = UDim2.new(1, 0, 0, 46)
 StatsCard.Position = UDim2.new(0, 0, 0, 0)
-StatsCard.BackgroundColor3 = Color3.fromRGB(13, 17, 30)
-StatsCard.BackgroundTransparency = 0.3
+StatsCard.BackgroundColor3 = Color3.fromRGB(18, 24, 42)
+StatsCard.BackgroundTransparency = 0.2
 Instance.new("UICorner", StatsCard).CornerRadius = UDim.new(0, 10)
 
 local StatsLabel = Instance.new("TextLabel", StatsCard)
@@ -187,8 +187,8 @@ local function createCard(parent, y, title, featureKey, callbackOn, callbackOff)
     local card = Instance.new("Frame", parent)
     card.Size = UDim2.new(1, 0, 0, 52)
     card.Position = UDim2.new(0, 0, 0, y)
-    card.BackgroundColor3 = Color3.fromRGB(13, 17, 30)
-    card.BackgroundTransparency = 0.3
+    card.BackgroundColor3 = Color3.fromRGB(18, 24, 42)
+    card.BackgroundTransparency = 0.2
     Instance.new("UICorner", card).CornerRadius = UDim.new(0, 10)
     
     local label = Instance.new("TextLabel", card)
@@ -205,7 +205,7 @@ local function createCard(parent, y, title, featureKey, callbackOn, callbackOff)
     toggleBg.Text = ""
     toggleBg.Size = UDim2.new(0, 46, 0, 24)
     toggleBg.Position = UDim2.new(1, -56, 0.5, -12)
-    toggleBg.BackgroundColor3 = Color3.fromRGB(25, 32, 52)
+    toggleBg.BackgroundColor3 = Color3.fromRGB(30, 40, 68)
     Instance.new("UICorner", toggleBg).CornerRadius = UDim.new(1, 0)
 
     local toggleCircle = Instance.new("Frame", toggleBg)
@@ -245,14 +245,14 @@ local function createCard(parent, y, title, featureKey, callbackOn, callbackOff)
             states.FPS = true
             label.Text = " 🚀 Max FPS: Fertig!"
             TweenService:Create(toggleBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(0, 162, 255)}):Play()
-            TweenService:Create(toggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(1, -21, 0.5, -9), BackgroundColor3 = Color3.fromRGB(8, 11, 20)}):Play()
+            TweenService:Create(toggleCircle, TweenInfo.new(0.2), {Position = UDim2.new(1, -21, 0.5, -9), BackgroundColor3 = Color3.fromRGB(12, 16, 28)}):Play()
             return
         end
 
         states[featureKey] = not states[featureKey]
         local active = states[featureKey]
-        TweenService:Create(toggleBg, TweenInfo.new(0.2), {BackgroundColor3 = active and Color3.fromRGB(0, 162, 255) or Color3.fromRGB(25, 32, 52)}):Play()
-        TweenService:Create(toggleCircle, TweenInfo.new(0.2), {Position = active and UDim2.new(1, -21, 0.5, -9) or UDim2.new(0, 3, 0.5, -9), BackgroundColor3 = active and Color3.fromRGB(8, 11, 20) or Color3.fromRGB(200, 200, 200)}):Play()
+        TweenService:Create(toggleBg, TweenInfo.new(0.2), {BackgroundColor3 = active and Color3.fromRGB(0, 162, 255) or Color3.fromRGB(30, 40, 68)}):Play()
+        TweenService:Create(toggleCircle, TweenInfo.new(0.2), {Position = active and UDim2.new(1, -21, 0.5, -9) or UDim2.new(0, 3, 0.5, -9), BackgroundColor3 = active and Color3.fromRGB(12, 16, 28) or Color3.fromRGB(200, 200, 200)}):Play()
 
         if active then callbackOn() else callbackOff() end
     end)
@@ -266,8 +266,8 @@ local function createInputCard(y, title, defaultVal, callback)
     local card = Instance.new("Frame", PlayerTab)
     card.Size = UDim2.new(1, 0, 0, 52)
     card.Position = UDim2.new(0, 0, 0, y)
-    card.BackgroundColor3 = Color3.fromRGB(13, 17, 30)
-    card.BackgroundTransparency = 0.3
+    card.BackgroundColor3 = Color3.fromRGB(18, 24, 42)
+    card.BackgroundTransparency = 0.2
     Instance.new("UICorner", card).CornerRadius = UDim.new(0, 10)
     
     local label = Instance.new("TextLabel", card)
@@ -284,7 +284,7 @@ local function createInputCard(y, title, defaultVal, callback)
     textBox.Text = tostring(defaultVal)
     textBox.Size = UDim2.new(0, 75, 0, 28)
     textBox.Position = UDim2.new(1, -85, 0.5, -14)
-    textBox.BackgroundColor3 = Color3.fromRGB(20, 26, 45)
+    textBox.BackgroundColor3 = Color3.fromRGB(25, 34, 58)
     textBox.TextColor3 = Color3.fromRGB(0, 162, 255)
     textBox.Font = Enum.Font.GothamBold
     textBox.TextSize = 12
@@ -406,6 +406,6 @@ end)
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "⚡ Kryx Hub",
-    Text = "Hintergrund erfolgreich geladen!",
+    Text = "Hintergrundbild aktiv!",
     Duration = 3
 })
