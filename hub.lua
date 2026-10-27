@@ -56,10 +56,11 @@ Main.Visible = false
 Main.Active = true
 Main.BackgroundTransparency = 0
 
+-- Hier wird das Bild korrekt erstellt und dein Bild-Link eingefügt:
 local BgImage = Instance.new("ImageLabel", Main)
 BgImage.Size = UDim2.new(1, 0, 1, 0)
 BgImage.BackgroundTransparency = 1
-BgImage.Image = "rbxassetid://6023426915"
+BgImage.Image = "https://raw.githubusercontent.com/shinxgiyt-art/KryxHub/main/IMG_fbefd108-ec3a-407d-9ae1-45ba9fe2b1f7.jpg"
 BgImage.ScaleType = Enum.ScaleType.Crop
 
 local Overlay = Instance.new("Frame", Main)
@@ -406,6 +407,6 @@ end)
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "⚡ Kryx Hub",
-    Text = "Hintergrundbild aktiv!",
+    Text = "Dein eigenes Bild wurde geladen!",
     Duration = 3
 })
