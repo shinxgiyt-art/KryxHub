@@ -5,8 +5,6 @@ local LocalizationService = game:GetService("LocalizationService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
-local TweenService = game:GetService("TweenService")
-local Camera = workspace.CurrentCamera
 local player = Players.LocalPlayer
 
 -- Sprache erkennen (Deutsch/Englisch)
@@ -18,8 +16,8 @@ pcall(function()
     end
 end)
 
-local txtNotifTitle = "Kryx Hub PRO"
-local txtNotifDesc = isGerman and "Breites Pro-Menü erfolgreich geladen! Drücke 'K'." or "Wide Pro Menu loaded successfully! Press 'K'."
+local txtNotifTitle = "Kryx Hub BLUE"
+local txtNotifDesc = isGerman and "Blaues Pro-Menü erfolgreich geladen! Drücke 'K'." or "Blue Pro Menu loaded successfully! Press 'K'."
 
 if CoreGui:FindFirstChild("KryxWideHub") then
     CoreGui.KryxWideHub:Destroy()
@@ -37,12 +35,12 @@ if not screenGui.Parent then
     screenGui.Parent = player:WaitForChild("PlayerGui")
 end
 
--- 1. Runder "K" Floating Button (zum Ein-/Ausblenden)
+-- 1. Runder "K" Floating Button (Blau)
 local toggleBtn = Instance.new("TextButton", screenGui)
 toggleBtn.Size = UDim2.new(0, 50, 0, 50)
 toggleBtn.Position = UDim2.new(0, 30, 0, 150)
 toggleBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-toggleBtn.TextColor3 = Color3.fromRGB(0, 255, 120)
+toggleBtn.TextColor3 = Color3.fromRGB(0, 150, 255)
 toggleBtn.TextSize = 22
 toggleBtn.Font = Enum.Font.Code
 toggleBtn.Text = "K"
@@ -51,12 +49,12 @@ toggleBtn.Draggable = true
 local btnCorner = Instance.new("UICorner", toggleBtn)
 btnCorner.CornerRadius = UDim.new(1, 0)
 local btnStroke = Instance.new("UIStroke", toggleBtn)
-btnStroke.Color = Color3.fromRGB(0, 255, 120)
+btnStroke.Color = Color3.fromRGB(0, 150, 255)
 btnStroke.Thickness = 2
 
--- 2. Das BREITE Hauptfenster (Verschiebbar)
+-- 2. Das breite Hauptfenster (Blau akzentuiert)
 local mainFrame = Instance.new("Frame", screenGui)
-mainFrame.Size = UDim2.new(0, 460, 0, 320) -- Schönes breites Format!
+mainFrame.Size = UDim2.new(0, 460, 0, 320)
 mainFrame.Position = UDim2.new(0.5, -230, 0.5, -160)
 mainFrame.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
 mainFrame.BackgroundTransparency = 0.05
@@ -66,7 +64,7 @@ mainFrame.Draggable = true
 local mainCorner = Instance.new("UICorner", mainFrame)
 mainCorner.CornerRadius = UDim.new(0, 10)
 local mainStroke = Instance.new("UIStroke", mainFrame)
-mainStroke.Color = Color3.fromRGB(0, 255, 120)
+mainStroke.Color = Color3.fromRGB(0, 150, 255)
 mainStroke.Thickness = 2
 
 -- Titel-Leiste oben
@@ -82,10 +80,10 @@ local titleText = Instance.new("TextLabel", titleBar)
 titleText.Size = UDim2.new(1, -20, 1, 0)
 titleText.Position = UDim2.new(0, 10, 0, 0)
 titleText.BackgroundTransparency = 1
-titleText.TextColor3 = Color3.fromRGB(0, 255, 120)
-titleText.TextSize = 15
+titleText.TextColor3 = Color3.fromRGB(0, 150, 255)
+titleText.TextSize = 14
 titleText.Font = Enum.Font.Code
-titleText.Text = "🔥 KRYX WIDE HUB [CUSTOM CONTROL PANEL]"
+titleText.Text = "🔥 KRYX WIDE HUB [BLUE EDITION]"
 titleText.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Schließen-Button oben rechts
@@ -103,7 +101,7 @@ closeBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = false
 end)
 
--- Linke Seite: Tabs / Kategorien (Performance, Cheats, Teleport)
+-- Linke Seite: Tabs / Kategorien
 local tabList = Instance.new("ScrollingFrame", mainFrame)
 tabList.Size = UDim2.new(0, 130, 1, -50)
 tabList.Position = UDim2.new(0, 5, 0, 45)
@@ -116,13 +114,12 @@ local tabLayout = Instance.new("UIListLayout", tabList)
 tabLayout.SortOrder = Enum.SortOrder.LayoutOrder
 tabLayout.Padding = UDim.new(0, 5)
 
--- Rechte Seite: Inhalt für den aktiven Tab
+-- Rechte Seite: Inhalt
 local contentArea = Instance.new("Frame", mainFrame)
 contentArea.Size = UDim2.new(1, -145, 1, -50)
 contentArea.Position = UDim2.new(0, 140, 0, 45)
 contentArea.BackgroundTransparency = 1
 
--- Container für die einzelnen Tabs
 local pages = {}
 
 local function createPage(name)
@@ -137,7 +134,6 @@ local function createPage(name)
     layout.SortOrder = Enum.SortOrder.LayoutOrder
     layout.Padding = UDim.new(0, 8)
     
-    -- Tab-Button links erstellen
     local tBtn = Instance.new("TextButton", tabList)
     tBtn.Size = UDim2.new(1, -5, 0, 35)
     tBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -157,16 +153,13 @@ local function createPage(name)
     return scroll
 end
 
--- Erste Seite standardmäßig öffnen
 local function showFirstPage(name)
     if pages[name] then pages[name].Visible = true end
 end
 
-
--- ================= TAB 1: PLAYER & CUSTOM VALUES =================
+-- ================= TAB 1: PLAYER & STATS =================
 local pagePlayer = createPage("Player & Stats")
 
--- Helper für Buttons
 local function addBtn(parent, text, cb)
     local b = Instance.new("TextButton", parent)
     b.Size = UDim2.new(1, -10, 0, 32)
@@ -179,18 +172,18 @@ local function addBtn(parent, text, cb)
     b.MouseButton1Click:Connect(function() cb(b) end)
 end
 
--- Einstellbarer Speed Slider / Input
+-- Speed Input (Blau)
 local speedBox = Instance.new("TextBox", pagePlayer)
 speedBox.Size = UDim2.new(1, -10, 0, 32)
 speedBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-speedBox.TextColor3 = Color3.fromRGB(0, 255, 120)
+speedBox.TextColor3 = Color3.fromRGB(0, 150, 255)
 speedBox.TextSize = 13
 speedBox.Font = Enum.Font.Code
-speedBox.PlaceholderText = "WalkSpeed eingeben (z.B. 100)"
+speedBox.PlaceholderText = "WalkSpeed (z.B. 100)"
 speedBox.Text = ""
 Instance.new("UICorner", speedBox).CornerRadius = UDim.new(0, 6)
 
-speedBox.FocusLost:Connect(falsch) do
+speedBox.FocusLost:Connect(function()
     local val = tonumber(speedBox.Text)
     if val then
         local char = player.Character
@@ -200,14 +193,14 @@ speedBox.FocusLost:Connect(falsch) do
     end
 end)
 
--- Einstellbarer JumpPower Input
+-- JumpPower Input (Blau)
 local jumpBox = Instance.new("TextBox", pagePlayer)
 jumpBox.Size = UDim2.new(1, -10, 0, 32)
 jumpBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-jumpBox.TextColor3 = Color3.fromRGB(0, 255, 120)
+jumpBox.TextColor3 = Color3.fromRGB(0, 150, 255)
 jumpBox.TextSize = 13
 jumpBox.Font = Enum.Font.Code
-jumpBox.PlaceholderText = "JumpPower eingeben (z.B. 120)"
+jumpBox.PlaceholderText = "JumpPower (z.B. 120)"
 jumpBox.Text = ""
 Instance.new("UICorner", jumpBox).CornerRadius = UDim.new(0, 6)
 
@@ -255,8 +248,7 @@ RunService.Stepped:Connect(function()
     end
 end)
 
-
--- ================= TAB 2: PERFORMANCE & FPS =================
+-- ================= TAB 2: PERFORMANCE =================
 local pagePerf = createPage("Performance")
 
 addBtn(pagePerf, "🔓 FPS Unlocker (999)", function(b)
@@ -290,7 +282,6 @@ addBtn(pagePerf, "💡 Fullbright (No Dark)", function(b)
     Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
 end)
 
-
 -- ================= TAB 3: TELEPORT =================
 local pageTp = createPage("Player TP")
 
@@ -320,19 +311,15 @@ local function updateTpList()
     end
 end
 Players.PlayerAdded:Connect(updateTpList)
-Players.PlayerRemoving:Connect(updatePlayerList or updateTpList)
+Players.PlayerRemoving:Connect(updateTpList)
 updateTpList()
 
-
--- Erste Seite direkt anzeigen
 showFirstPage("Player & Stats")
 
--- K-Button schaltet Menü an/aus
 toggleBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = not mainFrame.Visible
 end)
 
--- Benachrichtigung
 pcall(function()
     StarterGui:SetCore("SendNotification", {
         Title = txtNotifTitle,
